@@ -12,7 +12,6 @@ public class AgendaContatos {
     }
 
     //Adiciona um contato à agenda.
-
     public void adicionarContato(String nome, int numero) {
         contatoSet.add(new Contato(nome, numero));
     }
