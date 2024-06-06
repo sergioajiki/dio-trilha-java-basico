@@ -18,7 +18,7 @@ public class ListaTarefas {
 
     //Remove uma tarefa do Set de acordo com a descrição, se estiver presente.
     public void removerTarefa(String descricao) {
-        listaTarefaSet.remove(descricao);
+        listaTarefaSet.removeIf(tarefa -> tarefa.getDescricao().equalsIgnoreCase(descricao));
     }
 
     //Exibe todas as tarefas da lista de tarefas.
@@ -73,4 +73,40 @@ public class ListaTarefas {
     public void limparListaTarefas() {
         listaTarefaSet.clear();
     }
+
+    public static void main(String[] args) {
+        ListaTarefas listaTarefas = new ListaTarefas();
+        listaTarefas.adicionarTarefa("Tarefa 1");
+        listaTarefas.adicionarTarefa("Tarefa 2");
+        listaTarefas.adicionarTarefa("Tarefa 3");
+        listaTarefas.adicionarTarefa("Tarefa 4");
+
+        System.out.println("Todas as tarefas:");
+        listaTarefas.exibirTarefas();
+
+        listaTarefas.marcarTarefaConcluida("Tarefa 2");
+        listaTarefas.marcarTarefaConcluida("Tarefa 3");
+
+
+        System.out.println("\nTarefas concluídas:");
+        listaTarefas.obterTarefasConcluidas().forEach(System.out::println);
+
+        System.out.println("\nTarefas pendentes:");
+        listaTarefas.obterTarefasPendentes().forEach(System.out::println);
+
+        listaTarefas.removerTarefa("Tarefa 2");
+
+        System.out.println("\nTarefas após remover 'Tarefa 2':");
+        listaTarefas.exibirTarefas();
+
+        System.out.println("\nNúmero total de tarefas: " + listaTarefas.contarTarefas());
+
+        listaTarefas.limparListaTarefas();
+
+        System.out.println("\nTarefas após limpar a lista:");
+        listaTarefas.exibirTarefas();
+
+        System.out.println("Quantidade de tarefas: " + listaTarefas.contarTarefas());
+    }
+
 }
