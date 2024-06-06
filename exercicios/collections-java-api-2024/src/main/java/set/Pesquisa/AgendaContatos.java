@@ -45,4 +45,26 @@ public class AgendaContatos {
         }
         return contatoAtualizado;
     }
+
+    public static void main(String[] args) {
+        AgendaContatos agendaContatos = new AgendaContatos();
+
+        agendaContatos.exibirContatos();
+
+        agendaContatos.adicionarContato("Contato1", 123);
+        agendaContatos.adicionarContato("Contato2", 456);
+        agendaContatos.adicionarContato("3Contato", 789);
+        agendaContatos.adicionarContato("Contato4", 999);
+        agendaContatos.adicionarContato("Contato5", 111);
+
+        agendaContatos.exibirContatos();
+
+        System.out.println(agendaContatos.pesquisarPorNome("3"));
+
+        System.out.println("Contato atualizado: " + agendaContatos.atualizarNumeroContato("Contato4", 777777));
+
+        agendaContatos.exibirContatos();
+
+
+    }
 }
