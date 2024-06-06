@@ -1,13 +1,15 @@
 package main.java.list.Ordenacao;
 
-public class Pessoa {
+import java.util.Comparator;
+
+public class Pessoa implements Comparable<Pessoa>{
     private String nome;
-    private int Idade;
+    private int idade;
     private double altura;
 
     public Pessoa(String nome, int idade, double altura) {
         this.nome = nome;
-        Idade = idade;
+        this.idade = idade;
         this.altura = altura;
     }
 
@@ -15,11 +17,31 @@ public class Pessoa {
         return nome;
     }
 
+    @Override
+    public int compareTo(Pessoa p) {
+        return Integer.compare(idade, p.getIdade());
+    }
+
     public int getIdade() {
-        return Idade;
+        return idade;
     }
 
     public double getAltura() {
         return altura;
+    }
+
+    @Override
+    public String toString() {
+        return "Pessoa{" +
+                "nome='" + nome + '\'' +
+                ", Idade=" + idade +
+                ", altura=" + altura +
+                '}';
+    }
+    static class ComparatorPorAltura implements Comparator<Pessoa> {
+        @Override
+        public int compare(Pessoa p1, Pessoa p2) {
+            return Double.compare(p1.getAltura(), p2.getAltura());
+        }
     }
 }
