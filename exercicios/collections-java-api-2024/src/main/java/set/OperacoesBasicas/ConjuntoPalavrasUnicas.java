@@ -30,5 +30,23 @@ public class ConjuntoPalavrasUnicas {
         for(String palavra : palavraSet)
             System.out.println(palavra);
     }
+    public static void main(String[] args) {
+        ConjuntoPalavrasUnicas conjunto = new ConjuntoPalavrasUnicas();
+        conjunto.adicionarPalavra("Palavra1");
+        conjunto.adicionarPalavra("Palavra2");
+        conjunto.adicionarPalavra("Palavra3");
+        conjunto.adicionarPalavra("Palavra4");
+        conjunto.adicionarPalavra("Palavra5");
+        conjunto.adicionarPalavra("Palavra2"); // Palavra duplicada
 
+        System.out.println("Palavras no conjunto:");
+        conjunto.exibirPalavrasUnicas();
+
+        System.out.println("Verificando se 'Palavra1' está no conjunto: " + conjunto.verificarPalavra("Palavra1"));
+        System.out.println("Verificando se 'Palavra' está no conjunto: " + conjunto.verificarPalavra("Palavra"));
+
+        conjunto.removerPalavra("Palavra2");
+        System.out.println("Palavras no conjunto após remover 'Palavra2':");
+        conjunto.exibirPalavrasUnicas();
+    }
 }
