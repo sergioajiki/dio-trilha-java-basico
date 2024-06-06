@@ -28,7 +28,23 @@ public class CadastroProdutos {
     //Exibe todos os produtos do cadastro em ordem crescente de preço.
     public Set<Produto> exibirProdutosPorPreco() {
         Set<Produto> produtoPorPreco = new TreeSet<>(new Produto.ComparatorPorPreco());
-        produtoSet.addAll(produtoSet);
+        produtoPorPreco.addAll(produtoSet);
         return produtoPorPreco;
+    }
+
+    public static void main(String[] args) {
+        CadastroProdutos cadastroProdutos = new CadastroProdutos();
+
+        cadastroProdutos.adicionarProduto(1L, "Produto1", 150d, 50);
+        cadastroProdutos.adicionarProduto(2L, "Produto2", 20d, 10);
+        cadastroProdutos.adicionarProduto(3L, "Produto3", 100d, 12);
+        cadastroProdutos.adicionarProduto(3L, "Produto6", 50d, 14);
+        cadastroProdutos.adicionarProduto(4L, "Produto4", 33d, 33);
+
+        System.out.println(cadastroProdutos.produtoSet);
+
+        System.out.println("Produtor por nome: " + cadastroProdutos.exibirProdutosPorNome());
+
+        System.out.println("Produtos por preço: " + cadastroProdutos.exibirProdutosPorPreco());
     }
 }
