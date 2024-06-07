@@ -35,5 +35,19 @@ public class Dicionario {
         }
         return definicaoPorPalavra;
     }
+    public static void main(String[] args) {
+        Dicionario dicionario = new Dicionario();
+        dicionario.adicionarPalavra("casa", "Construção destinada a servir de moradia.");
+        dicionario.adicionarPalavra("carro", "Veículo automotor com quatro rodas usado para transporte.");
+        dicionario.adicionarPalavra("java", "Linguagem de programação orientada a objetos.");
 
+        System.out.println("Exibindo todas as palavras do dicionário:");
+        dicionario.exibirPalavras();
+
+        System.out.println("\nDefinição da palavra 'carro': " + dicionario.pesquisarPorPalavra("carro"));
+
+        dicionario.removerPalavra("casa");
+        System.out.println("\nDicionário após remover a palavra 'casa':");
+        dicionario.exibirPalavras();
+    }
 }
