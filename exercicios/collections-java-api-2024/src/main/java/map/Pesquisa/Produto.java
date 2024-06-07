@@ -2,24 +2,33 @@ package main.java.map.Pesquisa;
 
 public class Produto {
     private String nome;
-    private Double preco;
     private Integer quantidade;
+    private Double preco;
 
-    public Produto(String nome, Double preco, Integer quantidade) {
+    public Produto(String nome, Integer quantidade, Double preco) {
         this.nome = nome;
-        this.preco = preco;
         this.quantidade = quantidade;
+        this.preco = preco;
     }
 
     public String getNome() {
         return nome;
     }
 
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
     public Double getPreco() {
         return preco;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "nome='" + nome + '\'' +
+                ", quantidade=" + quantidade +
+                ", preco=" + preco +
+                '}';
     }
 }
