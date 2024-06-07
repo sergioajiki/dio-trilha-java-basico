@@ -13,7 +13,7 @@ public class AgendaEventos {
     }
 
     //Adiciona um evento à agenda.
-    public void adicionarEvento(LocalDate data, String nome, String atracao){
+    public void adicionarEvento(LocalDate data, String nome, String atracao) {
         eventoMap.put(data, new Evento(nome, atracao));
     }
 
@@ -30,7 +30,7 @@ public class AgendaEventos {
         Evento proximoEvento = null;
         Map<LocalDate, Evento> eventoMapTreeMap = new TreeMap<>(eventoMap);
 
-        for (Map.Entry<LocalDate, Evento> entry : eventoMap.entrySet()) {
+        for (Map.Entry<LocalDate, Evento> entry : eventoMapTreeMap.entrySet()) {
             if (entry.getKey().isEqual(dataAtual) || entry.getKey().isAfter(dataAtual)) {
                 proximaData = entry.getKey();
                 proximoEvento = entry.getValue();
@@ -38,6 +38,18 @@ public class AgendaEventos {
                 break;
             }
         }
+    }
 
+    public static void main(String[] args) {
+        AgendaEventos agendaEventos = new AgendaEventos();
+        agendaEventos.adicionarEvento(LocalDate.of(2022, 7, 15), "Evento1", "Atração1");
+        agendaEventos.adicionarEvento(LocalDate.of(2022, 7, 9), "Evento2", "Atração2");
+        agendaEventos.adicionarEvento(LocalDate.of(2000, 1, 10), "Evento3", "Atração3");
+        agendaEventos.adicionarEvento(LocalDate.of(2025, 1, 11), "Evento4", "Atração4");
+        agendaEventos.adicionarEvento(LocalDate.of(2024, 12, 10), "Evento5", "Atração5");
+
+        agendaEventos.exibirAgenda();
+
+        agendaEventos.obterProximoEvento();
     }
 }
