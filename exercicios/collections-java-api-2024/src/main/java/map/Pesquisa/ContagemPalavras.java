@@ -38,4 +38,27 @@ public class ContagemPalavras {
         return palavraMaisFrequente;
     }
 
+    // Adiciona palavras de um texto à contagem.
+    public void adicionarPalavrasDoTexto(String texto) {
+        // separa as palavras por espaços e pontuações
+        String[] palavras = texto.split("\\W+");
+        for (String palavra : palavras) {
+            // converte a palavra para minúsculas
+            palavra = palavra.toLowerCase();
+            palavrasMap.put(palavra, palavrasMap.getOrDefault(palavra, 0) + 1);
+        }
+    }
+
+    // Método main para testar a classe
+    public static void main(String[] args) {
+        ContagemPalavras contagem = new ContagemPalavras();
+        String texto = "HashMap é uma implementação da interface Map que não mantém uma ordem específica dos elementos. Ele armazena os elementos internamente usando uma função de hash para melhorar a eficiência das operações de pesquisa e acesso. O HashMap também permite chaves ou valores nulos.";
+        contagem.adicionarPalavrasDoTexto(texto);
+
+        System.out.println("Contagem de palavras:");
+        contagem.exibirContagemPalavras();
+
+        System.out.println("\nPalavra mais frequente:");
+        System.out.println(contagem.encontrarPalavraMaisFrequente());
+    }
 }
