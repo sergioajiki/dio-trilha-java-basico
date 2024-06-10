@@ -3,7 +3,7 @@ package Interface;
 public interface ReprodutorMusical {
     void tocar();
 
-    void pauser();
+    void pausar();
 
     void selecionarMusica(String music);
 }
