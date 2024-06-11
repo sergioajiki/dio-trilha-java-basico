@@ -6,6 +6,7 @@ public class Main {
     public static void main(String[] args) {
         Cliente sergio = new Cliente();
         sergio.setNome("Sergio");
+        sergio.setCpf("123456789-01");
 
         Conta cc = new ContaCorrente(sergio);
         Conta poupanca = new ContaPoupanca(sergio);
