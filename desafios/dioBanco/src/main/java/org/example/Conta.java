@@ -21,21 +21,22 @@ public class Conta implements IConta {
 
     @Override
     public void sacar(double valor) {
-
+        saldo -= valor;
     }
 
     @Override
     public void depositar(double valor) {
-
+        saldo += valor;
     }
 
     @Override
-    public void tranferir(double valor, IConta contaDestino) {
-
+    public void transferir(double valor, IConta contaDestino) {
+        this.sacar(valor);
+        contaDestino.depositar(valor);
     }
 
     @Override
     public void imprimirExtrato() {
-
+        System.out.println(String.format("Saldo: %.2f", this.saldo));
     }
 }
