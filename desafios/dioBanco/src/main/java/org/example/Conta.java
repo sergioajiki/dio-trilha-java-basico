@@ -3,7 +3,6 @@ package org.example;
 import lombok.Getter;
 import org.example.interfaces.IConta;
 
-
 @Getter
 public class Conta implements IConta {
     private static final int AGENCIA_PADRAO = 1;
@@ -13,6 +12,12 @@ public class Conta implements IConta {
     protected int numero;
     protected double saldo;
     protected Cliente cliente;
+
+    public Conta(Cliente cliente) {
+        this.agencia = Conta.AGENCIA_PADRAO;
+        this.numero = SEQUENCIAL++;
+        this.cliente = cliente;
+    }
 
     @Override
     public void sacar(double valor) {
