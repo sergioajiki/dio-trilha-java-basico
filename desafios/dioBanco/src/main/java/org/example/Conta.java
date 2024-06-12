@@ -44,7 +44,7 @@ public abstract class Conta implements IConta {
     }
 
     public void imprimirInfoComuns() {
-        System.out.println(String.format("Titular: %s", this.cliente.getNome()));
+        System.out.println(String.format("\nTitular: %s", this.cliente.getNome()));
         System.out.println(String.format("CPF: %s", this.cliente.getCpf()));
         System.out.println(String.format("Agencia: %d", this.agencia));
         System.out.println(String.format("Numero: %d", this.numero));
@@ -53,7 +53,7 @@ public abstract class Conta implements IConta {
 
     @Override
     public void imprimirExtrato() {
-        System.out.println("Extrato de Transações");
+        System.out.println("---Extrato de Transações---");
         for(Transacao transacao : transacaoList) {
             System.out.println(String.format("%s - %s - R$%.2f - Saldo após transação: R$%.2f",
                     transacao.getDataHoraTransacao(),
