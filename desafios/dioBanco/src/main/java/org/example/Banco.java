@@ -18,7 +18,7 @@ public class Banco {
     }
     public void exibirTodasContas() {
         List<Conta> todasContas = this.getAllContas();
-        System.out.println("Contas do banco:");
+        System.out.println("\nContas do banco:");
         for (Conta conta : todasContas) {
             conta.imprimirInfoComuns();
         }

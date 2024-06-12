@@ -3,6 +3,8 @@ package org.example;
 import lombok.Getter;
 import org.example.interfaces.IConta;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +26,20 @@ public abstract class Conta implements IConta {
         this.transacaoList = new ArrayList<>();
     }
 
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     @Override
     public void sacar(double valor) {
-        saldo -= valor;
-        transacaoList.add(new Transacao("Saque", valor, saldo));
+        if (saldo >= valor) {
+            saldo -= valor;
+            transacaoList.add(new Transacao("Saque", valor, saldo));
+        } else {
+            System.out.println(LocalDateTime.now().format(formatter)
+                    + " - Saque - R$ "
+                    + valor
+                    + " - Saldo insuficiente para saque."
+            );
+        }
     }
 
     @Override
@@ -38,9 +50,17 @@ public abstract class Conta implements IConta {
 
     @Override
     public void transferir(double valor, IConta contaDestino) {
-        this.sacar(valor);
-        contaDestino.depositar(valor);
-        transacaoList.add(new Transacao("Tranferência", valor, saldo));
+        if (saldo >= valor) {
+            this.sacar(valor);
+            contaDestino.depositar(valor);
+            transacaoList.add(new Transacao("Tranferência", valor, saldo));
+        } else {
+            System.out.println(LocalDateTime.now().format(formatter)
+                    + " - Transferência - R$ "
+                    + valor
+                    + " - Saldo insuficiente para transferência."
+            );
+        }
     }
 
     public void imprimirInfoComuns() {
@@ -54,7 +74,7 @@ public abstract class Conta implements IConta {
     @Override
     public void imprimirExtrato() {
         System.out.println("---Extrato de Transações---");
-        for(Transacao transacao : transacaoList) {
+        for (Transacao transacao : transacaoList) {
             System.out.println(String.format("%s - %s - R$%.2f - Saldo após transação: R$%.2f",
                     transacao.getDataHoraTransacao(),
                     transacao.getTransacao(),
@@ -62,4 +82,4 @@ public abstract class Conta implements IConta {
                     transacao.getSaldoAposTransacao()));
         }
     }
- }
+}

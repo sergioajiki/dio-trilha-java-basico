@@ -40,9 +40,17 @@ public class Main {
 
         Conta conta2 = new ContaCorrente(cliente2);
         contas.add(conta2);
+        conta2.depositar(15);
+        conta2.imprimirExtrato();
+        conta2.sacar(100);
+
+
 
         Conta conta3 = new ContaPoupanca(cliente3);
         contas.add(conta3);
+        conta3.depositar(1000);
+        conta3.imprimirExtrato();
+        conta3.transferir(1500, poupanca);
 
         banco.exibirTodasContas();
     }
