@@ -34,9 +34,10 @@ public abstract class Conta implements IConta {
             transacaoList.add(new Transacao("Saque", valor, saldo));
         } else {
             System.out.println(String.format(
-                    "%s - Saque - R$%.2f - Saldo insuficiente para saque.",
+                    "%s - Saque - R$%.2f - Saldo insuficiente para saque. Saldo atual: R$%.2f.",
                     LocalDateTime.now().format(formatter),
-                    valor));
+                    valor,
+                    saldo));
         }
     }
 
@@ -55,9 +56,10 @@ public abstract class Conta implements IConta {
             ((Conta) contaDestino).getTransacaoList().add(new Transacao("Transferência recebida de " + this.numero, valor, ((Conta) contaDestino).getSaldo()));
         } else {
             System.out.println(String.format(
-                    "%s - Transferência - R$%.2f - Saldo insuficiente para transferência.",
+                    "%s - Transferência - R$%.2f - Saldo insuficiente para transferência. Saldo atual: R$%.2f.",
                     LocalDateTime.now().format(formatter),
-                    valor));
+                    valor,
+                    saldo));
         }
     }
 
