@@ -7,7 +7,8 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         List<Conta> contas = new ArrayList<>();
-        Banco banco = new Banco("Dio Banco", contas, new HashSet<>());
+        List<Cliente> clienteList = new ArrayList<>();
+        Banco banco = new Banco("Dio Banco", contas, new HashSet<>(), clienteList);
 
         Cliente sergio = new Cliente("Sergio","123456789-01");
         banco.adicionarCliente(sergio);
@@ -51,8 +52,6 @@ public class Main {
         conta2.imprimirExtrato();
         conta2.sacar(100);
 
-
-
         Conta conta3 = new ContaPoupanca(cliente3);
         contas.add(conta3);
         conta3.depositar(1000);
@@ -60,5 +59,7 @@ public class Main {
         conta3.transferir(1500, poupanca);
 
         banco.exibirTodasContas();
+
+        banco.exibirTodosClientes();
     }
 }
