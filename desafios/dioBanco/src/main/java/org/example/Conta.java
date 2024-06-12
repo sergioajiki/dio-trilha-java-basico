@@ -34,11 +34,10 @@ public abstract class Conta implements IConta {
             saldo -= valor;
             transacaoList.add(new Transacao("Saque", valor, saldo));
         } else {
-            System.out.println(LocalDateTime.now().format(formatter)
-                    + " - Saque - R$ "
-                    + valor
-                    + " - Saldo insuficiente para saque."
-            );
+            System.out.println(String.format(
+                    "%s - Saque - R$%.2f - Saldo insuficiente para saque.",
+                    LocalDateTime.now().format(formatter),
+                    valor));
         }
     }
 
@@ -55,11 +54,10 @@ public abstract class Conta implements IConta {
             contaDestino.depositar(valor);
             transacaoList.add(new Transacao("Tranferência", valor, saldo));
         } else {
-            System.out.println(LocalDateTime.now().format(formatter)
-                    + " - Transferência - R$ "
-                    + valor
-                    + " - Saldo insuficiente para transferência."
-            );
+            System.out.println(String.format(
+                    "%s - Transferência - R$%.2f - Saldo insuficiente para transferência.",
+                    LocalDateTime.now().format(formatter),
+                    valor));
         }
     }
 
