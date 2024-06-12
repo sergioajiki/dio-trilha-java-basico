@@ -19,7 +19,7 @@ public class Banco {
 
     public boolean adicionarCliente(Cliente cliente) {
         if (cpfRegistradoSet.contains(cliente.getCpf())) {
-            System.out.println(String.format("\nO cpf %s já está cadastrado neste banco", cliente.getCpf()));
+            System.out.println(String.format("\nO Cpf %s já está cadastrado neste banco", cliente.getCpf()));
             return false;
         }
         cpfRegistradoSet.add(cliente.getCpf());

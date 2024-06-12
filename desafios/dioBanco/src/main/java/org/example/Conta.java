@@ -18,6 +18,7 @@ public abstract class Conta implements IConta {
     protected double saldo;
     protected Cliente cliente;
     protected List<Transacao> transacaoList;
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public Conta(Cliente cliente) {
         this.agencia = Conta.AGENCIA_PADRAO;
@@ -25,8 +26,6 @@ public abstract class Conta implements IConta {
         this.cliente = cliente;
         this.transacaoList = new ArrayList<>();
     }
-
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     @Override
     public void sacar(double valor) {
@@ -52,7 +51,8 @@ public abstract class Conta implements IConta {
         if (saldo >= valor) {
             this.sacar(valor);
             contaDestino.depositar(valor);
-            transacaoList.add(new Transacao("Tranferência", valor, saldo));
+            transacaoList.add(new Transacao("Transferência para " + ((Conta) contaDestino).getNumero(), valor, saldo));
+            ((Conta) contaDestino).getTransacaoList().add(new Transacao("Transferência recebida de " + this.numero, valor, ((Conta) contaDestino).getSaldo()));
         } else {
             System.out.println(String.format(
                     "%s - Transferência - R$%.2f - Saldo insuficiente para transferência.",
@@ -69,7 +69,6 @@ public abstract class Conta implements IConta {
         System.out.println(String.format("Saldo: %.2f", this.saldo));
     }
 
-    @Override
     public void imprimirExtrato() {
         System.out.println("---Extrato de Transações---");
         for (Transacao transacao : transacaoList) {
