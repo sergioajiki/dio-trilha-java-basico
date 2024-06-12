@@ -1,17 +1,24 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         List<Conta> contas = new ArrayList<>();
-        Banco banco = new Banco("Dio Banco", contas);
+        Banco banco = new Banco("Dio Banco", contas, new HashSet<>());
 
         Cliente sergio = new Cliente("Sergio","123456789-01");
+        banco.adicionarCliente(sergio);
         Cliente cliente1 = new Cliente("Cliente1", "999999999-00");
-        Cliente cliente2 = new Cliente("João Silva", "123.456.789-00");
-        Cliente cliente3 = new Cliente("Maria Souza", "987.654.321-00");
+        banco.adicionarCliente(cliente1);
+        Cliente cliente2 = new Cliente("Cliente2", "123.456.789-00");
+        banco.adicionarCliente(cliente2);
+        Cliente cliente3 = new Cliente("Cliente3", "987.654.321-00");
+        banco.adicionarCliente(cliente3);
+        Cliente sergio2 = new Cliente("Sergio2","123456789-01");
+        banco.adicionarCliente(sergio2);
 
         Conta cc = new ContaCorrente(sergio);
         contas.add(cc);
