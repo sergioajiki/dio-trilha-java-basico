@@ -30,6 +30,7 @@ public class Banco {
     public List<Conta> getAllContas() {
         return contas;
     }
+
     public void exibirTodasContas() {
         List<Conta> todasContas = this.getAllContas();
         System.out.println("\nContas do banco:");
