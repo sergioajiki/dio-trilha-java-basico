@@ -1,5 +1,6 @@
 package one.digitalinnovation.lab_padroes_projeto_spring.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import one.digitalinnovation.lab_padroes_projeto_spring.model.Cliente;
 import one.digitalinnovation.lab_padroes_projeto_spring.model.Endereco;
 import one.digitalinnovation.lab_padroes_projeto_spring.repository.ClienteRepository;
@@ -33,15 +34,13 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente buscarPorId(Long id) {
-//        Optional<Cliente> cliente = clienteRepository.findById(id);
-//        return cliente.get();
-        return clienteRepository.findById(id).orElse(null);
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+        return cliente.orElseThrow(() -> new EntityNotFoundException("Cliente com id " + id + " não foi encontrado"));
     }
 
     @Override
     public void inserir(Cliente cliente) {
         salvarClienteComCep(cliente);
-
     }
 
     @Override
@@ -52,12 +51,18 @@ public class ClienteServiceImpl implements ClienteService {
 ////        }
         if (clienteRepository.existsById(id)) {
             salvarClienteComCep(cliente);
+        } else {
+            throw new EntityNotFoundException("Cliente com id " + id + " não foi encontrado");
         }
     }
 
     @Override
     public void deletar(Long id) {
-        clienteRepository.deleteById(id);
+        if (clienteRepository.existsById(id)) {
+            clienteRepository.deleteById(id);
+        } else {
+            throw new EntityNotFoundException("Cliente com id " + id + " não foi encontrado");
+        }
     }
 
     private void salvarClienteComCep(Cliente cliente) {
