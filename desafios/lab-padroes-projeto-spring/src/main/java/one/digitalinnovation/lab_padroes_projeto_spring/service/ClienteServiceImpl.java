@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
-
     private ClienteRepository clienteRepository;
     private EnderecoRepository enderecoRepository;
     private ViaCepService viaCepService;
@@ -25,7 +24,6 @@ public class ClienteServiceImpl implements ClienteService {
         this.enderecoRepository = enderecoRepository;
         this.viaCepService = viaCepService;
     }
-
 
     @Override
     public Iterable<Cliente> buscarTodos() {
@@ -45,10 +43,6 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void atualizar(Long id, Cliente cliente) {
-//        Optional<Cliente> clienteBd = clienteRepository.findById(id);
-////        if (clienteBd.isPresent()) {
-////            salvarClienteComCep(cliente);
-////        }
         if (clienteRepository.existsById(id)) {
             salvarClienteComCep(cliente);
         } else {
