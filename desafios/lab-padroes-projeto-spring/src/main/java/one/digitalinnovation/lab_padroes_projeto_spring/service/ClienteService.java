@@ -7,5 +7,5 @@ public interface ClienteService {
     Cliente buscarPorId(Long id);
     void inserir(Cliente cliente);
     void atualizar(Long id, Cliente cliente);
-    void deleter(Long id);
+    void deletar(Long id);
 }
