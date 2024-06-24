@@ -12,12 +12,18 @@ import java.util.Optional;
 @Service
 public class ClienteServiceImpl implements ClienteService {
 
-    @Autowired
     private ClienteRepository clienteRepository;
-    @Autowired
     private EnderecoRepository enderecoRepository;
-    @Autowired
     private ViaCepService viaCepService;
+
+    @Autowired
+    public ClienteServiceImpl(ClienteRepository clienteRepository,
+                              EnderecoRepository enderecoRepository,
+                              ViaCepService viaCepService) {
+        this.clienteRepository = clienteRepository;
+        this.enderecoRepository = enderecoRepository;
+        this.viaCepService = viaCepService;
+    }
 
 
     @Override
@@ -27,8 +33,9 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente buscarPorId(Long id) {
-        Optional<Cliente> cliente = clienteRepository.findById(id);
-        return cliente.get();
+//        Optional<Cliente> cliente = clienteRepository.findById(id);
+//        return cliente.get();
+        return clienteRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -39,8 +46,11 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void atualizar(Long id, Cliente cliente) {
-        Optional<Cliente> clienteBd = clienteRepository.findById(id);
-        if (clienteBd.isPresent()) {
+//        Optional<Cliente> clienteBd = clienteRepository.findById(id);
+////        if (clienteBd.isPresent()) {
+////            salvarClienteComCep(cliente);
+////        }
+        if (clienteRepository.existsById(id)) {
             salvarClienteComCep(cliente);
         }
     }
