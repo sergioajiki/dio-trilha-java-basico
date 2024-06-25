@@ -9,5 +9,4 @@ public class DesafioSantanderApiDeploy2024Application {
 	public static void main(String[] args) {
 		SpringApplication.run(DesafioSantanderApiDeploy2024Application.class, args);
 	}
-
 }
