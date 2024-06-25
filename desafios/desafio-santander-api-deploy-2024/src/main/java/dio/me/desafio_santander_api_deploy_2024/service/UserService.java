@@ -3,11 +3,13 @@ package dio.me.desafio_santander_api_deploy_2024.service;
 import dio.me.desafio_santander_api_deploy_2024.model.User;
 import dio.me.desafio_santander_api_deploy_2024.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 
     private UserRepository userRepository;
 
@@ -16,13 +18,16 @@ public class UserService implements IUserService{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> findAll() {
-        return null;
+        return this.userRepository.findAll();
     }
 
     @Override
-    public User findById(Long aLong) {
-        return null;
+    @Transactional(readOnly = true)
+    public User findById(Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
+        return userOptional.orElseThrow(null);
     }
 
     @Override
