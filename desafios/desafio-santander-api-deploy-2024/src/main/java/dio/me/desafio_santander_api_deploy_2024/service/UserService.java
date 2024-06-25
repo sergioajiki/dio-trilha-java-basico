@@ -76,5 +76,4 @@ public class UserService implements IUserService {
         }
         this.userRepository.delete(userOptional.get());
     }
-
 }
