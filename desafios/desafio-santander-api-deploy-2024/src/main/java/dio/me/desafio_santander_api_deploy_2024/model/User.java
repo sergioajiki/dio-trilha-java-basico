@@ -17,7 +17,7 @@ public class User {
     @OneToMany
     private List<Feature> featureList;
     @OneToMany
-    private List<News> news;
+    private List<News> newsList;
 
     public Long getId() {
         return id;
@@ -59,11 +59,11 @@ public class User {
         this.featureList = featureList;
     }
 
-    public List<News> getNews() {
-        return news;
+    public List<News> getNewsList() {
+        return newsList;
     }
 
-    public void setNews(List<News> news) {
-        this.news = news;
+    public void setNewsList(List<News> news) {
+        this.newsList = news;
     }
 }
