@@ -1,5 +1,6 @@
 package dio.me.desafio_santander_api_deploy_2024.service;
 
+import dio.me.desafio_santander_api_deploy_2024.exception.NotFoundException;
 import dio.me.desafio_santander_api_deploy_2024.model.User;
 import dio.me.desafio_santander_api_deploy_2024.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class UserService implements IUserService {
     @Transactional(readOnly = true)
     public User findById(Long id) {
         Optional<User> userOptional = userRepository.findById(id);
-        return userOptional.orElseThrow(null);
+        return userOptional.orElseThrow(() -> new NotFoundException("User winh id " + id + " not found"));
     }
 
     @Override
