@@ -49,7 +49,6 @@ public class UserController {
                 .path("/id")
                 .buildAndExpand(userToCreate.getId())
                 .toUri();
-
         return ResponseEntity.created(location).body(new UserDto(userToCreate));
     }
 
@@ -67,5 +66,4 @@ public class UserController {
         userService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 }
