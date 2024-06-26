@@ -10,13 +10,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Account account;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Card card;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Feature> featureList;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<News> newsList;
 
     public Long getId() {
@@ -63,7 +63,7 @@ public class User {
         return newsList;
     }
 
-    public void setNewsList(List<News> news) {
-        this.newsList = news;
+    public void setNewsList(List<News> newsList) {
+        this.newsList = newsList;
     }
 }

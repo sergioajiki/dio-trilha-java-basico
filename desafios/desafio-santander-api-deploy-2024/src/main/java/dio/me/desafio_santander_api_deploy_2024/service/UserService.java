@@ -14,6 +14,7 @@ import static java.util.Optional.ofNullable;
 
 @Service
 public class UserService implements IUserService {
+    private static final Long UNCHANGEABLE_USER_ID = 1L;
 
     private UserRepository userRepository;
 
@@ -40,18 +41,24 @@ public class UserService implements IUserService {
     @Override
     @Transactional
     public User create(User userToCreate) {
+        ofNullable(userToCreate).orElseThrow(() -> new BusinessException("User to create must not be null."));
+        ofNullable(userToCreate.getAccount()).orElseThrow(() -> new BusinessException("User account must not be null."));
+        ofNullable(userToCreate.getCard()).orElseThrow(() -> new BusinessException("User card must not be null."));
+
+        this.validateChangeableId(userToCreate.getId(), "created");
         if (userRepository.existsByAccountNumber(userToCreate.getAccount().getNumber())) {
-            throw new BusinessException("This Account number already exists.");
+            throw new BusinessException("This account number already exists.");
         }
-        if (userRepository.existsByAccountNumber(userToCreate.getCard().getNumber())) {
-            throw new BusinessException("This Card number already exists.");
+        if (userRepository.existsByCardNumber(userToCreate.getCard().getNumber())) {
+            throw new BusinessException("This card number already exists.");
         }
-        return userRepository.save(userToCreate);
+        return this.userRepository.save(userToCreate);
     }
 
     @Override
     @Transactional
     public User update(Long id, User userToUpdate) {
+        this.validateChangeableId(id, "updated");
         Optional<User> userOptional = this.userRepository.findById(id);
         if (userOptional.isEmpty()) {
             throw new NotFoundException("User with id " + id + " not found");
@@ -70,10 +77,17 @@ public class UserService implements IUserService {
     @Override
     @Transactional
     public void delete(Long id) {
+        this.validateChangeableId(id, "deleted");
         Optional<User> userOptional = this.userRepository.findById(id);
         if (userOptional.isEmpty()) {
             throw new NotFoundException("User with id " + id + " not found");
         }
         this.userRepository.delete(userOptional.get());
+    }
+
+    private void validateChangeableId(Long id, String operation) {
+        if (UNCHANGEABLE_USER_ID.equals(id)) {
+            throw new BusinessException("User with ID %d can not be %s.".formatted(UNCHANGEABLE_USER_ID, operation));
+        }
     }
 }

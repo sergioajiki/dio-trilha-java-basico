@@ -13,8 +13,8 @@ public record UserDto(
         String name,
         AccountDto account,
         CardDto card,
-        List<FeatureDto> featureDtoList,
-        List<NewsDto> newsDtoList
+        List<FeatureDto> featureList,
+        List<NewsDto> newsList
 ) {
     public UserDto(User model) {
         this(
@@ -33,8 +33,8 @@ public record UserDto(
         model.setName(this.name);
         model.setAccount(ofNullable(this.account).map(AccountDto::toModel).orElse(null));
         model.setCard(ofNullable(this.card).map(CardDto::toModel).orElse(null));
-        model.setFeatureList(ofNullable(this.featureDtoList).orElse(emptyList()).stream().map(FeatureDto::toModel).collect(Collectors.toList()));
-        model.setNewsList(ofNullable(this.newsDtoList).orElse(emptyList()).stream().map(NewsDto::toModel).collect(Collectors.toList()));
+        model.setFeatureList(ofNullable(this.featureList).orElse(emptyList()).stream().map(FeatureDto::toModel).collect(Collectors.toList()));
+        model.setNewsList(ofNullable(this.newsList).orElse(emptyList()).stream().map(NewsDto::toModel).collect(Collectors.toList()));
         return model;
     }
 }
